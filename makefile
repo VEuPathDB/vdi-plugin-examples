@@ -7,6 +7,12 @@ nothing:
 	@echo "run-bash-example"
 	@echo "    Runs the bash example Docker container."
 	@echo ""
+	@echo "build-go-example"
+	@echo "    Builds the go example Docker image."
+	@echo ""
+	@echo "run-go-example"
+	@echo "    Runs the go example Docker container."
+	@echo ""
 	@echo "build-perl-example"
 	@echo "    Builds the perl example Docker image."
 	@echo ""
@@ -24,6 +30,18 @@ run-bash-example:
 		--rm \
 		--env-file=example.env \
 		vdi-handler-bash-example
+
+build-go-example:
+	@docker build \
+		-t vdi-handler-go-example \
+		go-example
+
+run-go-example:
+	@docker run \
+		-it \
+		--rm \
+		--env-file=example.env \
+		vdi-handler-go-example
 
 build-perl-example:
 	@docker build \

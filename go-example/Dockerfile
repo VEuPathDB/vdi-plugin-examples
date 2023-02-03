@@ -1,8 +1,23 @@
-FROM golang:1.20-alpine3.16
+FROM golang:1.20-alpine3.16 AS build
 
-# TODO: Build the scripts into binaries
+WORKDIR /project
 
+COPY scripts scripts/
+
+RUN \
+  env CGO_ENABLED=0 GOOS=linux go build -o import scripts/import/import.go; \
+  env CGO_ENABLED=0 GOOS=linux go build -o install-data scripts/install-data/install-data.go; \
+  env CGO_ENABLED=0 GOOS=linux go build -o install-meta scripts/install-meta/install-meta.go; \
+  env CGO_ENABLED=0 GOOS=linux go build -o uninstall scripts/uninstall/uninstall.go;
 
 FROM veupathdb/vdi-handler-server:latest
 
-# TODO: copy the built binaries to the correct locations
+RUN mkdir /opt/veupathdb
+
+COPY --from=build [ \
+  "/project/import", \
+  "/project/install-data", \
+  "/project/install-meta", \
+  "/project/uninstall", \
+  "/opt/veupathdb/" \
+]
