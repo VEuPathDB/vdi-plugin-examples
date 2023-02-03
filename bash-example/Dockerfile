@@ -1,4 +1,4 @@
-FROM veupathdb/vdi-handler-server
+FROM veupathdb/vdi-handler-server:latest
 
 RUN mkdir "/opt/veupathdb"
 
