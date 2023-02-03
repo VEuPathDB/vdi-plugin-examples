@@ -1,3 +1,4 @@
 = Bash/Shell Example
 
-Example VDI Plugin Handler Server setup using Bash for the plugin scripts.
+Example VDI Plugin Handler Server setup using Bash/Shell for the plugin scripts.
+
