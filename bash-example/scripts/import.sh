@@ -17,7 +17,7 @@ logMessage() {
 }
 
 printWarning() {
-  echo $1
+  echo "$1"
 }
 
 verifyDir() {
@@ -53,5 +53,6 @@ logMessage "Here's a log message that will be printed to STDERR"
 for file in "${INPUT_DIR}"/*; do
   logMessage "Copying ${file} to ${OUTPUT_DIR}"
   printWarning "Here's a validation warning about ${file} that will be printed to STDOUT"
+  # validate "$file" || exit $EXIT_CODE_VALIDATION_ERROR
   cp "${file}" "${OUTPUT_DIR}"
 done
