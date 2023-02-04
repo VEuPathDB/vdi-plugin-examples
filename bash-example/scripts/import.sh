@@ -12,15 +12,15 @@ EXIT_CODE_UNEXPECTED_ERROR=3
 # Utilities
 #
 
-function logMessage() {
-  >&2 echo $1
+logMessage() {
+  >&2 echo "$1"
 }
 
-function printWarning() {
+printWarning() {
   echo $1
 }
 
-function verifyDir() {
+verifyDir() {
   if [ -z "$1" ]; then
     logMessage "required directory parameter was blank or absent"
     return 1
@@ -50,8 +50,8 @@ verifyDir "${OUTPUT_DIR}" || exit $EXIT_CODE_UNEXPECTED_ERROR
 
 logMessage "Here's a log message that will be printed to STDERR"
 
-for file in `ls $INPUT_DIR`; do
-  logMessage "Copying $file to $OUTPUT_DIR"
-  printWarning "Here's a validation warning about $file that will be printed to STDOUT"
-  cp $file $OUTPUT_DIR
+for file in "${INPUT_DIR}"/*; do
+  logMessage "Copying ${file} to ${OUTPUT_DIR}"
+  printWarning "Here's a validation warning about ${file} that will be printed to STDOUT"
+  cp "${file}" "${OUTPUT_DIR}"
 done
