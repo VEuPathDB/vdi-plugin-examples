@@ -23,10 +23,10 @@ public class Main {
     verifyEnv("DB_USER", System.getenv("DB_USER"));
     verifyEnv("DB_PASS", System.getenv("DB_PASS"));
 
-    runInstall(inputDir);
+    runInstall(vdiID, inputDir);
   }
 
-  private static void runInstall(File inputDir) {
+  private static void runInstall(String vdiID, File inputDir) {
     // TODO: do the things needed to install a dataset
   }
 
