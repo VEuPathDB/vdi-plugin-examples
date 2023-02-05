@@ -34,11 +34,12 @@ def require_env(name):
 # Input Handling
 #
 
-if len(sys.argv) < 2:
-    log_message("called with too few arguments, callers must provide an input directory")
+if len(sys.argv) < 3:
+    log_message("called with too few arguments, callers must provide a VDI dataset ID and an input directory")
     sys.exit(1)
 
-INPUT_DIR = sys.argv[1]
+VDI_ID = sys.argv[1]
+INPUT_DIR = sys.argv[2]
 
 verify_dir(INPUT_DIR)
 
