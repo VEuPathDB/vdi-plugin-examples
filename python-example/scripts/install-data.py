@@ -33,7 +33,7 @@ def verify_env(name, value):
 #
 
 if len(sys.argv) < 2:
-    log_message("called with too few arguments, callers must provide an input and output directory")
+    log_message("called with too few arguments, callers must provide an input directory")
     sys.exit(1)
 
 INPUT_DIR = sys.argv[1]
