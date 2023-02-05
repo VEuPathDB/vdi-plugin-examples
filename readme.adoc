@@ -6,3 +6,20 @@ Server's plugin API in various languages.
 Each directory under this root directory is intended to be a jumping off point
 for the development of a VDI plugin.  All that is necessary is to copy the
 contents of the target directory (or directories) into a new repository.
+
+== Usage
+
+=== Demonstration
+
+Each one of the examples contains a working Dockerfile that can be used to spin
+up a working VDI Plugin Handler Server instance.
+
+For convenience, the steps necessary to build and start a working example
+container have been provided in the included `makefile`.
+
+TODO
+
+* copy `example.env` to just `.env`
+* edit the credentials
+* spin up sshuttle or some other method to give you access to the LDAP servers
+* run makefile steps
