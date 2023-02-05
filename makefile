@@ -24,6 +24,12 @@ nothing:
 	@echo ""
 	@echo "run-perl-example"
 	@echo "    Runs the perl example Docker container."
+	@echo ""
+	@echo "build-python-example"
+	@echo "    Builds the python example Docker image."
+	@echo ""
+	@echo "run-python-example"
+	@echo "    Runs the python example Docker container."
 
 build-bash-example:
 	@docker build \
@@ -72,3 +78,15 @@ run-perl-example:
 		--rm \
 		--env-file=example.env \
 		vdi-handler-perl-example
+
+build-python-example:
+	@docker build \
+		-t vdi-handler-python-example \
+		python-example
+
+run-python-example:
+	@docker run \
+		-it \
+		--rm \
+		--env-file=example.env \
+		vdi-handler-python-example
