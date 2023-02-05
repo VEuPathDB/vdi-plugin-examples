@@ -13,6 +13,12 @@ nothing:
 	@echo "run-go-example"
 	@echo "    Runs the go example Docker container."
 	@echo ""
+	@echo "build-java-example"
+	@echo "    Builds the java example Docker image."
+	@echo ""
+	@echo "run-java-example"
+	@echo "    Runs the java example Docker container."
+	@echo ""
 	@echo "build-perl-example"
 	@echo "    Builds the perl example Docker image."
 	@echo ""
@@ -42,6 +48,18 @@ run-go-example:
 		--rm \
 		--env-file=example.env \
 		vdi-handler-go-example
+
+build-java-example:
+	@docker build \
+		-t vdi-handler-java-example \
+		java-example
+
+run-java-example:
+	@docker run \
+		-it \
+		--rm \
+		--env-file=example.env \
+		vdi-handler-java-example
 
 build-perl-example:
 	@docker build \
