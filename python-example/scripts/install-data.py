@@ -22,10 +22,12 @@ def verify_dir(path):
         sys.exit(1)
 
 
-def verify_env(name, value):
-    if value == "" or value is None:
+def require_env(name):
+    out = os.getenv(name)
+    if out == "" or out is None:
         log_message(f"required environment variable {name} is blank or unset")
         sys.exit(1)
+    return out
 
 
 #
@@ -40,12 +42,11 @@ INPUT_DIR = sys.argv[1]
 
 verify_dir(INPUT_DIR)
 
-verify_env("DB_HOST", os.getenv("DB_HOST"))
-verify_env("DB_PORT", os.getenv("DB_PORT"))
-verify_env("DB_NAME", os.getenv("DB_NAME"))
-verify_env("DB_USER", os.getenv("DB_USER"))
-verify_env("DB_PASS", os.getenv("DB_PASS"))
-
+DB_HOST = require_env("DB_HOST")
+DB_PORT = require_env("DB_PORT")
+DB_NAME = require_env("DB_NAME")
+DB_USER = require_env("DB_USER")
+DB_PASS = require_env("DB_PASS")
 
 #
 # Script Body
