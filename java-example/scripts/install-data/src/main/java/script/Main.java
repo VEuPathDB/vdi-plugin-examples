@@ -6,13 +6,15 @@ public class Main {
   private final static int EXIT_CODE_UNEXPECTED_ERROR = 1;
 
   public static void main(String[] args) {
-    if (args.length < 1) {
-      logMessage("called with too few arguments, callers must provide an input directory");
+    if (args.length < 2) {
+      logMessage("called with too few arguments, callers must provide a VDI dataset ID and an input directory");
       System.exit(EXIT_CODE_UNEXPECTED_ERROR);
     }
 
-    var inputDir = new File(args[0]);
+    var vdiID = args[0];
+    var inputDir = new File(args[1]);
 
+    verifyVDIID(vdiID);
     verifyDir(inputDir);
 
     verifyEnv("DB_HOST", System.getenv("DB_HOST"));
@@ -41,6 +43,12 @@ public class Main {
     if (!dir.isDirectory()) {
       logMessage("target directory " + dir + " is not a directory");
       System.exit(EXIT_CODE_UNEXPECTED_ERROR);
+    }
+  }
+
+  private static void verifyVDIID(String id) {
+    if (id == null || id.isBlank()) {
+      logMessage("vdi_id parameter was blank");
     }
   }
 

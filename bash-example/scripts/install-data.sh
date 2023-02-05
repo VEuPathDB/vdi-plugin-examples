@@ -8,6 +8,12 @@ logMessage() {
   >&2 echo "$1"
 }
 
+verifyVDIID() {
+  if [ -z "$1" ]; then
+    logMessage "vdi_id parameter was blank or absent"
+  fi
+}
+
 verifyDir() {
   if [ -z "$1" ]; then
     logMessage "required directory parameter was blank or absent"
@@ -33,9 +39,11 @@ verifyEnv() {
 # Input Handling
 #
 
-INPUT_DIR=$1
+VDI_ID=$1
+INPUT_DIR=$2
 
-verifyDir "${INPUT_DIR}"
+verifyVDIID "$VDI_ID"
+verifyDir "$INPUT_DIR"
 
 verifyEnv "DB_HOST" "$DB_HOST"
 verifyEnv "DB_PORT" "$DB_PORT"
