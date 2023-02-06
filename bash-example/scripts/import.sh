@@ -1,37 +1,17 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
-#
-# Exit Codes
-#
+# Get the current workspace directory.
+SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)
 
-EXIT_CODE_VALIDATION_ERROR=1
-EXIT_CODE_TRANSFORMATION_ERROR=2
-EXIT_CODE_UNEXPECTED_ERROR=3
+# Include some common functionality
+. "$SCRIPT_DIR/includes.sh"
 
 #
 # Utilities
 #
 
-logMessage() {
-  >&2 echo "$1"
-}
-
 printWarning() {
   echo "$1"
-}
-
-verifyDir() {
-  if [ -z "$1" ]; then
-    logMessage "required directory parameter was blank or absent"
-    return 1
-  fi
-
-  if [ ! -d "$1" ]; then
-    logMessage "directory $1 does not exist or is not a directory"
-    return 1
-  fi
-
-  return 0
 }
 
 #
