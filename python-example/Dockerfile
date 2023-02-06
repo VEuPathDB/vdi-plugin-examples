@@ -1,11 +1,14 @@
 FROM veupathdb/vdi-handler-server:latest
 
-RUN apk add --no-cache python3; mkdir "/opt/veupathdb"
+RUN apk add --no-cache python3
 
-COPY scripts/import.py /opt/veupathdb/import
-COPY scripts/install-meta.py /opt/veupathdb/install-meta
-COPY scripts/install-data.py /opt/veupathdb/install-data
-COPY scripts/uninstall.py /opt/veupathdb/uninstall
+WORKSPACE /opt/veupathdb
+
+COPY scripts/vdi.py vdi.py
+COPY scripts/import.py import
+COPY scripts/install-meta.py install-meta
+COPY scripts/install-data.py install-data
+COPY scripts/uninstall.py uninstall
 
 RUN chmod +x \
   /opt/veupathdb/import \
