@@ -15,3 +15,7 @@ tasks.shadowJar {
 
   archiveFileName.set("uninstall.jar")
 }
+
+dependencies {
+  implementation(project(":scripts:common"))
+}

@@ -15,3 +15,7 @@ tasks.shadowJar {
 
   archiveFileName.set("import.jar")
 }
+
+dependencies {
+  implementation(project(":scripts:common"))
+}

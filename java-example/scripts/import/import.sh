@@ -1,3 +1,3 @@
 #!/usr/bin/env sh
 
-java -jar import.jar $@
+java -jar "/opt/veupathdb/import.jar" $@

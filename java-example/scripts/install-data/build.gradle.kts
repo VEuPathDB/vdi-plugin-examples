@@ -15,3 +15,7 @@ tasks.shadowJar {
 
   archiveFileName.set("install-data.jar")
 }
+
+dependencies {
+  implementation(project(":scripts:common"))
+}

@@ -1,61 +1,44 @@
 package script;
 
+import vdi.VDI;
+
 import java.io.File;
+import java.util.HashMap;
 
 public class Main {
-  private final static int EXIT_CODE_UNEXPECTED_ERROR = 1;
+
+  //
+  // Input Handling
+  //
 
   public static void main(String[] args) {
     if (args.length < 2) {
-      logMessage("called with too few arguments, callers must provide a VDI dataset ID and an input directory");
-      System.exit(EXIT_CODE_UNEXPECTED_ERROR);
+      VDI.logMessage("called with too few arguments, callers must provide a VDI dataset ID and an input directory");
+      System.exit(VDI.EXIT_CODE_UNEXPECTED_ERROR);
     }
 
     var vdiID = args[0];
     var inputDir = new File(args[1]);
 
-    verifyVDIID(vdiID);
-    verifyDir(inputDir);
+    VDI.verifyVDIID(vdiID);
+    VDI.verifyDir(inputDir);
 
-    verifyEnv("DB_HOST", System.getenv("DB_HOST"));
-    verifyEnv("DB_PORT", System.getenv("DB_PORT"));
-    verifyEnv("DB_NAME", System.getenv("DB_NAME"));
-    verifyEnv("DB_USER", System.getenv("DB_USER"));
-    verifyEnv("DB_PASS", System.getenv("DB_PASS"));
+    var env = new HashMap<String, String>(5);
 
-    runInstall(vdiID, inputDir);
+    env.put("DB_HOST", VDI.requireEnv("DB_HOST"));
+    env.put("DB_PORT", VDI.requireEnv("DB_PORT"));
+    env.put("DB_NAME", VDI.requireEnv("DB_NAME"));
+    env.put("DB_USER", VDI.requireEnv("DB_USER"));
+    env.put("DB_PASS", VDI.requireEnv("DB_PASS"));
+
+    runInstall(vdiID, inputDir, env);
   }
 
-  private static void runInstall(String vdiID, File inputDir) {
+  //
+  // Script Body
+  //
+
+  private static void runInstall(String vdiID, File inputDir, HashMap<String, String> env) {
     // TODO: do the things needed to install a dataset
-  }
-
-  private static void logMessage(String message) {
-    System.err.println(message);
-  }
-
-  private static void verifyDir(File dir) {
-    if (!dir.exists()) {
-      logMessage("target directory " + dir + " does not exist");
-      System.exit(EXIT_CODE_UNEXPECTED_ERROR);
-    }
-
-    if (!dir.isDirectory()) {
-      logMessage("target directory " + dir + " is not a directory");
-      System.exit(EXIT_CODE_UNEXPECTED_ERROR);
-    }
-  }
-
-  private static void verifyVDIID(String id) {
-    if (id == null || id.isBlank()) {
-      logMessage("vdi_id parameter was blank");
-    }
-  }
-
-  private static void verifyEnv(String name, String value) {
-    if (value == null || value.isBlank()) {
-      logMessage("required environment variable " + name + " is blank or unset");
-      System.exit(EXIT_CODE_UNEXPECTED_ERROR);
-    }
   }
 }

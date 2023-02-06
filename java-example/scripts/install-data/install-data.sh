@@ -1,3 +1,3 @@
 #!/usr/bin/env sh
 
-java -jar install-data.jar $@
+java -jar "/opt/veupathdb/install-data.jar" $@

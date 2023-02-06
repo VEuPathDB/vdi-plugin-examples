@@ -15,3 +15,7 @@ tasks.shadowJar {
 
   archiveFileName.set("install-meta.jar")
 }
+
+dependencies {
+  implementation(project(":scripts:common"))
+}
