@@ -1,15 +1,15 @@
 FROM veupathdb/vdi-handler-server:latest
 
 # Install perl and cpan
-RUN apk add --no-cache perl perl-utils \
-  && mkdir "/opt/veupathdb"
+RUN apk add --no-cache perl perl-utils
 
-# TODO copy perl scripts into target locations
+WORKSPACE /opt/veupathdb
 
-COPY scripts/import.pl /opt/veupathdb/import
-COPY scripts/install-data.pl /opt/veupathdb/install-data
-COPY scripts/install-meta.pl /opt/veupathdb/install-meta
-COPY scripts/uninstall.pl /opt/veupathdb/uninstall
+COPY scripts/VDI.pm VDI.pm
+COPY scripts/import.pl import
+COPY scripts/install-data.pl install-data
+COPY scripts/install-meta.pl install-meta
+COPY scripts/uninstall.pl uninstall
 
 RUN chmod +x \
   /opt/veupathdb/import \
