@@ -49,12 +49,14 @@ Server or any of the included example plugin scripts.  The TNS name is required 
 
 === Run an Example
 
+--
 . Build the target example docker container by using one of the included `make`
   build commands.
 . Start up sshuttle (see the VEuPathDB confluence documentation for running a
   service locally).
 . Run the target example docker container by running one of the included `make`
   run commands.
+--
 
 Example::
 +
