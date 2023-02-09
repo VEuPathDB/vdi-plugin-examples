@@ -3,7 +3,7 @@
 This repository contains example implementations of the VDI Plugin Handler
 Server's plugin API in various languages.
 
-Each directory under this root directory is intended to be a jumping off point
+Each directory under the  root directory is intended to be a jumping off point
 for the development of a VDI plugin.  All that is necessary is to copy the
 contents of the target directory (or directories) into a new repository.
 

@@ -27,4 +27,5 @@ verifyEnv "DB_PASS" "$DB_PASS" || exit $EXIT_CODE_UNEXPECTED_ERROR
 # Script Body
 #
 
+>&2 env
 # TODO: Call some commands and do the things needed to install a dataset.

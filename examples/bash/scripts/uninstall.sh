@@ -11,10 +11,8 @@ SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &> /dev/null && pwd)
 #
 
 VDI_ID="$1"
-META_FILE_PATH="$2"
 
 verifyVDIID "$VDI_ID" || exit $EXIT_CODE_UNEXPECTED_ERROR
-verifyFile "$META_FILE_PATH" || exit $EXIT_CODE_UNEXPECTED_ERROR
 
 verifyEnv "DB_HOST" "$DB_HOST" || exit $EXIT_CODE_UNEXPECTED_ERROR
 verifyEnv "DB_PORT" "$DB_PORT" || exit $EXIT_CODE_UNEXPECTED_ERROR
@@ -26,4 +24,5 @@ verifyEnv "DB_PASS" "$DB_PASS" || exit $EXIT_CODE_UNEXPECTED_ERROR
 # Script Body
 #
 
-# TODO: Do the meta installation!
+>&2 env
+# TODO: Do the uninstallation!

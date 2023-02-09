@@ -34,7 +34,7 @@ nothing:
 build-bash-example:
 	@docker build \
 		-t vdi-handler-bash-example \
-		bash-example
+		example/bash
 
 run-bash-example:
 	@docker run \
@@ -46,7 +46,7 @@ run-bash-example:
 build-go-example:
 	@docker build \
 		-t vdi-handler-go-example \
-		go-example
+		example/go
 
 run-go-example:
 	@docker run \
@@ -58,7 +58,7 @@ run-go-example:
 build-java-example:
 	@docker build \
 		-t vdi-handler-java-example \
-		java-example
+		example/java
 
 run-java-example:
 	@docker run \
@@ -70,7 +70,7 @@ run-java-example:
 build-perl-example:
 	@docker build \
 		-t vdi-handler-perl-example \
-		perl-example
+		example/perl
 
 run-perl-example:
 	@docker run \
@@ -82,7 +82,7 @@ run-perl-example:
 build-python-example:
 	@docker build \
 		-t vdi-handler-python-example \
-		python-example
+		example/python
 
 run-python-example:
 	@docker run \
