@@ -34,59 +34,64 @@ nothing:
 build-bash-example:
 	@docker build \
 		-t vdi-handler-bash-example \
-		example/bash
+		examples/bash
 
 run-bash-example:
 	@docker run \
 		-it \
 		--rm \
-		--env-file=example.env \
+		-p 8080:8080 \
+		--env-file=.env \
 		vdi-handler-bash-example
 
 build-go-example:
 	@docker build \
 		-t vdi-handler-go-example \
-		example/go
+		examples/go
 
 run-go-example:
 	@docker run \
 		-it \
 		--rm \
-		--env-file=example.env \
+		-p 8080:8080 \
+		--env-file=.env \
 		vdi-handler-go-example
 
 build-java-example:
 	@docker build \
 		-t vdi-handler-java-example \
-		example/java
+		examples/java
 
 run-java-example:
 	@docker run \
 		-it \
 		--rm \
-		--env-file=example.env \
+		-p 8080:8080 \
+		--env-file=.env \
 		vdi-handler-java-example
 
 build-perl-example:
 	@docker build \
 		-t vdi-handler-perl-example \
-		example/perl
+		examples/perl
 
 run-perl-example:
 	@docker run \
 		-it \
 		--rm \
-		--env-file=example.env \
+		-p 8080:8080 \
+		--env-file=.env \
 		vdi-handler-perl-example
 
 build-python-example:
 	@docker build \
 		-t vdi-handler-python-example \
-		example/python
+		examples/python
 
 run-python-example:
 	@docker run \
 		-it \
 		--rm \
-		--env-file=example.env \
+		-p 8080:8080 \
+		--env-file=.env \
 		vdi-handler-python-example

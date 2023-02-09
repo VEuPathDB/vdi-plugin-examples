@@ -1,15 +1,26 @@
 = VDI Handler Plugin Script Examples
+:icons: font
+
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
 
 This repository contains example implementations of the VDI Plugin Handler
 Server's plugin API in various languages.
 
-Each directory under the  root directory is intended to be a jumping off point
-for the development of a VDI plugin.  All that is necessary is to copy the
-contents of the target directory (or directories) into a new repository.
+Each directory under the link:examples[] directory is intended to be a jumping
+off point for the development of a VDI plugin.  All that is necessary is to copy
+the contents of the target directory (or directories) into a new repository.
 
-== Usage
+For more details about the scripts themselves and their inputs and outputs see
+the https://github.com/VEuPathDB/vdi-plugin-handler-server[VDI Plugin Handler Server]
+readme.
 
-=== Demonstration
+== Demonstration
 
 Each one of the examples contains a working Dockerfile that can be used to spin
 up a working VDI Plugin Handler Server instance.
@@ -17,9 +28,91 @@ up a working VDI Plugin Handler Server instance.
 For convenience, the steps necessary to build and start a working example
 container have been provided in the included `makefile`.
 
-TODO
+=== Prerequisites
 
-* copy `example.env` to just `.env`
-* edit the credentials
-* spin up sshuttle or some other method to give you access to the LDAP servers
-* run makefile steps
+* Docker
+* sshuttle
+
+=== Setup
+
+. Copy the link:example.env[] file from the root of this repo to a new file
+  named `.env`  in the repository root directory. +
+  The `.env` file will be ignored by Git by default.
+. Edit the new `.env` file by doing the following at minimum:
+.. Fill in the `LDAP_SERVER` variable value.
+.. Fill in the `ORACLE_BASE_DN` variable value.
+.. Fill in the `DB_CONNECTION_LDAP_EXAMPLE` variable value with the TNS name of
+   a real VEuPathDB database.
++
+NOTE: No connection to any databases will be attempted by the VDI Plugin Handler
+Server or any of the included example plugin scripts.  The TNS name is required solely for the LDAP lookup to function.
+
+=== Run an Example
+
+. Build the target example docker container by using one of the included `make`
+  build commands.
+. Start up sshuttle (see the VEuPathDB confluence documentation for running a
+  service locally).
+. Run the target example docker container by running one of the included `make`
+  run commands.
+
+Example::
++
+NOTE: This example assumes `sshuttle` is already running.
++
+[source, bash-session]
+----
+$ make build-bash-example
+[+] Building 0.1s (13/13) FINISHED
+ => [internal] load build definition from Dockerfile
+ => => transferring dockerfile: 532B
+ => [internal] load .dockerignore
+ => => transferring context: 2B
+ => [internal] load metadata for docker.io/veupathdb/vdi-handler-server:latest
+ => [1/8] FROM docker.io/veupathdb/vdi-handler-server:latest
+ => [internal] load build context
+ => => transferring context: 5.21kB
+ => CACHED [2/8] RUN apk add --no-cache bash;   mkdir "/opt/veupathdb"
+ => CACHED [3/8] COPY scripts/includes.sh /opt/veupathdb/includes.sh
+ => CACHED [4/8] COPY scripts/import.sh /opt/veupathdb/import
+ => CACHED [5/8] COPY scripts/install-meta.sh /opt/veupathdb/install-meta
+ => CACHED [6/8] COPY scripts/install-data.sh /opt/veupathdb/install-data
+ => CACHED [7/8] COPY scripts/uninstall.sh /opt/veupathdb/uninstall
+ => CACHED [8/8] RUN chmod +x   /opt/veupathdb/import   /opt/veupathdb/install-meta   /opt/veupathdb/install-data   /opt/veupathdb/uninstall
+ => exporting to image
+ => => exporting layers
+ => => writing image sha256:d33055b37bc5a22a48dce5bfbea56f033cb09dacc650a41688dc4c3a10f0446c
+ => => naming to docker.io/library/vdi-handler-bash-example
+$ make run-bash-example
+2023-02-09 16:32:30.507 DEBUG main - loading configuration
+2023-02-09 16:32:30.517 DEBUG main - validating configuration
+2023-02-09 16:32:30.517 INFO  main - Configuration:
+  HTTP Server:
+    Port: 8080
+    Host: 0.0.0.0
+  Service:
+    Import Script:
+      Path: /opt/veupathdb/import
+      Timeout: 1h
+    Install Meta Script:
+      Path: /opt/veupathdb/install-meta
+      Timeout: 1h
+    Install Data Script:
+      Path: /opt/veupathdb/install-data
+      Timeout: 1h
+    Uninstall Script:
+      Path: /opt/veupathdb/uninstall
+      Timeout: 1h
+  Databases:
+    ExampleDB:
+      LDAP Query: ***
+      Username: ***
+      Password: ***
+
+2023-02-09 16:32:30.533 DEBUG main - starting embedded server
+2023-02-09 16:32:30.566 INFO  ktor.application - Autoreload is disabled because the development mode is off.
+2023-02-09 16:32:30.576 DEBUG io.micrometer.common.util.internal.logging.InternalLoggerFactory - Using SLF4J as the default logging framework
+2023-02-09 16:32:30.578 INFO  io.micrometer.core.instrument.push.PushMeterRegistry - publishing metrics for LoggingMeterRegistry every 1m
+2023-02-09 16:32:30.606 INFO  ktor.application - Application started in 0.056 seconds.
+2023-02-09 16:32:30.703 INFO  ktor.application - Responding at http://0.0.0.0:8080
+----
