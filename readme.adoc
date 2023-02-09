@@ -60,7 +60,7 @@ Example::
 +
 NOTE: This example assumes `sshuttle` is already running.
 +
-[source, bash-session]
+[source, shell-session]
 ----
 $ make build-bash-example
 [+] Building 0.1s (13/13) FINISHED
