@@ -5,6 +5,3 @@ Example VDI Plugin Handler Server setup using Bash/Shell for the plugin scripts.
 In practice, the validation, transformation, installation, and/or uninstallation
 would likely not be performed by the shell scripts themselves but rather some
 installed CLI tool that the shell scripts call out to.
-
-
-
